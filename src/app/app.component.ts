@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { RoomList } from './roomLsit.model';
 import { Room } from './room.model';
 import { Booking } from './booking.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -10,13 +12,24 @@ import { Booking } from './booking.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  //countryForm: FormGroup;
+
   title = "Benvenuti all'hotel degli alberi";
   rooms = RoomList;
   selectedRoom: Room = RoomList[0];
   bookingList : Booking[];
+  o: Observable<Booking[]>;
+  JSONserver: string = 'https://my-json-server.typicode.com/malizia-g/hotel/booking';
+  
+  constructor(public http:HttpClient) {
+    this.getFromJSON();
+  }
 
-  constructor() { }
+  getFromJSON(): void
+  {
+    this.o = this.http.get<Booking[]>(this.JSONserver);
+    this.o.subscribe(data => {this.bookingList = data;});
+  }
+  
   ngOnInit() {
     this.bookingList = new Array<Booking>();
   }

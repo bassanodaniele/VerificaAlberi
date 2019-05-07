@@ -1,0 +1,13 @@
+<h2>Lista prenotazioni</h2>
+
+<button (click)="showHideList()">Mostra/Nascondi</button>
+
+<div *ngIf="isListVisible">
+
+<ul>
+  <li *ngFor="let pren of bookings">
+    <span>{{pren.name}} {{pren.surname}}</span>
+  </li>
+</ul>
+
+</div>

@@ -19,13 +19,17 @@
   </form>
 
 
-  {{selectedRoom | json}}
+  <!-- {{selectedRoom | json}} -->
 
  <ul>
    <li *ngFor="let pren of bookingList">
     {{pren.room.name}} : {{pren | json}}
    </li>
- </ul> 
- 
+ </ul>
 
- {{bookingList | json}}
+
+ <!-- {{bookingList | json}} -->
+
+ <app-lista-pren [bookings]='bookingList'></app-lista-pren>
+
+ <app-dettagli [room]='selectedRoom'></app-dettagli>
